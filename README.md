@@ -45,3 +45,17 @@ Follow these instructions to set up the project locally.
    ```bash
    git clone https://github.com/yourusername/github-profile-viewer.git
    cd github-profile-viewer
+
+2. Install dependancies
+   ```bash
+   npm install
+
+3. Running the Application
+   ```bash
+   npm run dev
+Open your browser and navigate to 'http://localhost:5173/' to see the application in action.
+
+4. Building application
+   ```bash
+   npm run build
+The build output will be in the dist directory.
