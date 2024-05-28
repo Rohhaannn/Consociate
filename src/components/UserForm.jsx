@@ -16,12 +16,12 @@ const UserForm = ({onSubmit}) => {
           value={username}
           onChange={(e)=>setUsername(e.target.value)}  
           placeholder='Enter Github Username'
-          className='p-2 border rounded mb-4'
+          className='p-2 border border-black rounded mb-4'
         />
 
         <button
           type='submit'
-          className='bg-blue-600 text-white px-4 py-2 rounded'
+          className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded'
         > 
           Get Profile 
         </button>
