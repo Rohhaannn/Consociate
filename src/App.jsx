@@ -1,37 +1,40 @@
-import './App.css'
-import { useState } from 'react'
-import UserCard from './components/UserCard'
-import UserForm from './components/UserForm'
+import React, { useState } from 'react';
+import UserForm from './components/UserForm';
+import UserCard from './components/UserCard';
 
-function App() {
+const App = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const getUserData = async (username) => {
+  const fetchUserData = async (username) => {
     try {
       setError('');
       const response = await fetch(`https://api.github.com/users/${username}`);
-      if(!response.ok) {
-        throw new Error('User Not Found');
+      if (!response.ok) {
+        throw new Error('User not found');
       }
       const data = await response.json();
-      setUser(data)
-    } catch (error) {
-      setError(error.message);
+      setUser(data);
+      setIsModalOpen(true);
+    } catch (err) {
+      setError(err.message);
       setUser(null);
     }
-  }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setUser(null);
+  };
 
   return (
-    <>
-      <div>
-        <UserForm onSubmit={getUserData} />
-        {error && <p className='mt-5 text-red-600'>{error}</p>}
-        {user && <UserCard user={user}/>}
-      </div>
-    
-    </>
-  )
-}
+    <div className="container mx-auto p-4">
+      <UserForm onSubmit={fetchUserData} />
+      {error && <p className="text-red-500">{error}</p>}
+      {isModalOpen && user && <UserCard user={user} onClose={closeModal} />}
+    </div>
+  );
+};
 
-export default App
+export default App;
