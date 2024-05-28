@@ -10,6 +10,7 @@ const UserForm = ({onSubmit}) => {
 
   return (
     <div>
+      <h1 className='text-center font-bold mb-7 text-[25px]'> Github Profile Viewer </h1>
       <form onSubmit={handleSubmit} className='flex flex-col items-center'>
         <input
           type='text'
