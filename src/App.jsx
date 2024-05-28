@@ -1,33 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react'
+import UserCard from './components/UserCard'
+import UserForm from './components/UserForm'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState('');
+
+  const getUserData = async (username) => {
+    try {
+      setError('');
+      const response = await fetch(`https://api.github.com/users/${username}`);
+      if(!response.ok) {
+        throw new Error('User Not Found');
+      }
+      const data = await response.json();
+      setUser(data)
+    } catch (error) {
+      setError(error.message);
+      setUser(null);
+    }
+  }
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <UserForm onSubmit={getUserData} />
+        {error && <p className='mt-5 text-red-600'>{error}</p>}
+        {user && <UserCard user={user}/>}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    
     </>
   )
 }
