@@ -15,7 +15,15 @@ const UserCard = ({user}) => {
           <p className='text-gray-700 text-base'>Name: {user.name} </p>
           <p className='text-gray-700 text-base'>Public Repos: {user.public_repos} </p>
           <p className='text-gray-700 text-base'>Public Gists: {user.public_gists}</p>
-          <p className='text-gray-700 text-base'>Profile Created At: {new Date(user.created_at).toISOString().split('T')[0]} </p>
+          <p className='text-gray-700 text-base'>Profile Created: {new Date(user.created_at).toISOString().split('T')[0]} </p>
+
+          <br/>
+
+          <a 
+            href={user.html_url}
+            target='_blank'
+            className='bg-blue-500 text-white hover:bg-blue-700 font-bold py-3 px-3 rounded-lg shadow-xl text-center'
+          > Go to Github Profile </a>
         </div>
 
       </div>
