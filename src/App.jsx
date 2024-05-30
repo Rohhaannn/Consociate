@@ -31,7 +31,7 @@ const App = () => {
   return (
     <div className="container mx-auto p-4">
       <UserForm onSubmit={fetchUserData} />
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 text-center mt-5">{error}</p>}
       {isModalOpen && user && <UserCard user={user} onClose={closeModal} />}
     </div>
   );
